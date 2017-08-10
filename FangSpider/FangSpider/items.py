@@ -7,12 +7,6 @@
 
 import scrapy
 
-
-class FangspiderItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
-
 class FangItem(scrapy.Item):
     fang_title = scrapy.Field() #标题
 
@@ -30,3 +24,7 @@ class FangItem(scrapy.Item):
     fang_xiaoqu = scrapy.Field() #小区
     fang_region1 = scrapy.Field() #区域1
     fang_region2 = scrapy.Field() #区域2
+
+class IpItem(scrapy.Item):
+    ip = scrapy.Field()
+    port = scrapy.Field()

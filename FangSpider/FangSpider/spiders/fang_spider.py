@@ -12,6 +12,14 @@ class FangSpider(CrawlSpider):
     start_urls = [
         'http://esf.fang.com/'
     ]
+    custom_settings = {
+        'MONGO_URI': 'mongodb://127.0.0.1:27017',
+        'MONGO_DATABASE': 'fangdata',
+        'ITEM_PIPELINES':{
+           'FangSpider.pipelines.JsonPipeline': 300,
+           'FangSpider.pipelines.MongoPipeline': 400,
+        }
+    }
 
     def __init__(self):
         self.website = 'http://esf.fang.com/'

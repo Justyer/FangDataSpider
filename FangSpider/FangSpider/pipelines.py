@@ -48,7 +48,7 @@ class JsonPipeline(object):
 
 class MongoPipeline(object):
 
-    collection_name = 'fangdatacol'
+    collection_name = 'cln'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri

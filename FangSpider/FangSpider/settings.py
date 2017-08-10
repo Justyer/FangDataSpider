@@ -72,10 +72,10 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'FangSpider.pipelines.JsonPipeline': 300,
-   'FangSpider.pipelines.MongoPipeline': 400,
-}
+# ITEM_PIPELINES = {
+#    'FangSpider.pipelines.JsonPipeline': 300,
+#    'FangSpider.pipelines.MongoPipeline': 400,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -97,8 +97,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
-MONGO_URI = 'mongodb://127.0.0.1:27017'
-MONGO_DATABASE = 'fangdata'
 
 LOG_LEVEL = 'DEBUG'
