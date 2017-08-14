@@ -26,5 +26,6 @@ class FangItem(scrapy.Item):
     fang_region2 = scrapy.Field() #区域2
 
 class IpItem(scrapy.Item):
+    table = scrapy.Field()
     ip = scrapy.Field()
     port = scrapy.Field()

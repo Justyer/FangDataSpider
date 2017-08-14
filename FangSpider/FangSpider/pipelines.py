@@ -9,6 +9,7 @@ import json
 import codecs
 import scrapy
 import pymongo
+import psycopg2
 
 from collections import OrderedDict
 from scrapy.exceptions import DropItem
@@ -70,4 +71,22 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         self.db[self.collection_name].insert_one(dict(item))
+        return item
+
+class PostgreSQLPipeline(object):
+    def process_item(self,item, spider):
+        conn = psycopg2.connect(database="ipproxypool", user="postgres", password="495495", host="127.0.0.1", port="5432")
+        try:
+            cur=conn.cursor()
+            cur.execute("insert into %s(ip, port) values('%s','%s')" % (item['table'],item['ip'],item['port']))
+            conn.commit()
+            #log.msg("Data added to PostgreSQL database!",level=log.DEBUG,spider=spider)
+        except Exception,e:
+            print 'insert record into table failed'
+            print e
+
+        finally:
+            if cur:
+                cur.close()
+        conn.close()
         return item

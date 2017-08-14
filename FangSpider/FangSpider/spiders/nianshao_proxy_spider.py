@@ -7,16 +7,17 @@ from scrapy.http import Request
 
 from FangSpider.items import *
 
-class IpSpider(CrawlSpider):
-    name = 'fang_proxy_ip'
+class NianshaoProxySpider(CrawlSpider):
+    name = 'nianshao_proxy_ip'
     start_urls = [
         'http://www.nianshao.me/'
     ]
     custom_settings = {
-        'MONGO_URI': 'mongodb://127.0.0.1:27017',
-        'MONGO_DATABASE': 'fangip',
+        #'MONGO_URI': 'mongodb://127.0.0.1:27017',
+        #'MONGO_DATABASE': 'fangip',
         'ITEM_PIPELINES':{
-           'FangSpider.pipelines.MongoPipeline': 300,
+           #'FangSpider.pipelines.MongoPipeline': 300,
+           'FangSpider.pipelines.PostgreSQLPipeline': 300,
         }
     }
 
@@ -43,6 +44,7 @@ class IpSpider(CrawlSpider):
             ports = Selector(response).xpath('//tbody/tr/td[2]/text()').extract()
             item = IpItem()
             for ip, port in zip(ips, ports):
-                item['ip'] = ip
-                item['port'] = port
+                item['table'] = 'nianshaoproxy'
+                item['ip'] = str(ip)
+                item['port'] = str(port)
                 yield item

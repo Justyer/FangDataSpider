@@ -14,10 +14,20 @@ class CustomHttpProxyFromMongoMiddleware(object):
     proxies = FREE_PROXIES
 
     def process_request(self, request, spider):
-        # TODO implement complex proxy providing algorithm
-        p = random.choice(self.proxies)
+
+        def __init__(self):
+            self.psy_db = 'proxypool'
+            self.psy_password = '495495'
+            self.psy_host = '127.0.0.1'
+            self.psy_port = '5432'
+            self.conn = psycopg2.connect(database=self.psy_db, user='postgres', password=self.psy_password, host=self.psy_host, port=self.psy.port)
+            self.cur = conn.cursor()
+
+        random_id = random.random(1, self.sur.rowcount)
+        self.cur = execute('select ip,port from proxypool where id=%d' % random_id)
+        p = self.cur.fetchone()[0]
         try:
-            request.meta['proxy'] = "http://%s" % p['ip_port']
+            request.meta['proxy'] = "http://%s:%s" % (p.ip, p.port)
             print(request.meta['proxy'])
         except Exception, e:
             #log.msg("Exception %s" % e, _level=log.CRITICAL)
